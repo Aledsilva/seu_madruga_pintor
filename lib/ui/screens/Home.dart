@@ -22,7 +22,11 @@ class _HomeState extends State<Home> {
   final TextEditingController _controllerLarguraP4 = TextEditingController();
 
 
-  String _textoResultado = "";
+  String _resultadoFinal = "";
+
+  String _alertaBotaoCalcular = "";
+
+  String _alertaCamposParedes = "";
 
   double portaDimen = 2.40;
   double janelaDimen = 1.52;
@@ -32,19 +36,29 @@ class _HomeState extends State<Home> {
   double lata_G = 3.6; //pinta 18m²
   double lata_XG = 18; //pinta 90m²
 
-
-
+  double alturaP1 = 0;
+  double larguraP1 = 0;
   int porta1 = 0;
   int janela1 = 0;
+  double totalParede1 = 0;
 
+  double alturaP2 = 0;
+  double larguraP2 = 0;
   int porta2 = 0;
   int janela2 = 0;
+  double totalParede2 = 0;
 
+  double alturaP3 = 0;
+  double larguraP3 = 0;
   int porta3 = 0;
   int janela3 = 0;
+  double totalParede3 = 0;
 
+  double alturaP4 = 0;
+  double larguraP4 = 0;
   int porta4 = 0;
   int janela4 = 0;
+  double totalParede4 = 0;
 
   // void _incrementCounter(int num) {
   //   setState(() {
@@ -59,6 +73,7 @@ class _HomeState extends State<Home> {
   //     });
   //   }
   // }
+
 
   void _calcular(){
 
@@ -80,20 +95,16 @@ class _HomeState extends State<Home> {
         || alturaParede4 == null || larguraParede4 == null
     ) {
       setState(() {
-        _textoResultado = "Separe os números utilizando (.)";
+        _alertaBotaoCalcular = "Separe os números utilizando (.)";
       });
     }else{
-      double resultP1 = alturaParede1 * larguraParede1;
-      double resultP2 = alturaParede2 * larguraParede2;
-      double resultP3 = alturaParede3 * larguraParede3;
-      double resultP4 = alturaParede4 * larguraParede4;
 
-      double resultadoFinal = resultP1+resultP2+resultP3+resultP4;
+      double resultadoFinal = totalParede1+totalParede2+totalParede3+totalParede4;
 
       setState(() {
-        print("TA AQUI: $resultP1, $resultP2, $resultP3, $resultP4  $resultadoFinal");
+        print("TA AQUI: $totalParede1, $totalParede2, $totalParede3, $totalParede4  $resultadoFinal");
 
-        _textoResultado = "O tamanho total é de $resultadoFinal m2";
+        _resultadoFinal = "O tamanho total é de $resultadoFinal m2";
 
       });
     }
@@ -131,6 +142,22 @@ class _HomeState extends State<Home> {
                       ),),
 
                     Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        color: Colors.redAccent,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: const [
+                            Text("Tamanho máximo 15m²",
+                            textAlign: TextAlign.center,),
+                            Text("Tamanho minimo 1m²",
+                            textAlign: TextAlign.center,),
+                          ],
+                        ),
+                      ),
+                    ),
+
+                    Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: TextField(
                         keyboardType: TextInputType.number,
@@ -149,6 +176,33 @@ class _HomeState extends State<Home> {
                             fontSize: 22
                         ),
                         controller: _controllerAlturaP1,
+                          onChanged: (text){
+
+
+                            if(_controllerAlturaP1.text == ""){
+                              setState(() {
+                                alturaP1 = 0;
+                                _alertaCamposParedes = "Preencha os campos";
+                              });
+                              print("AQUI: VAZIO $alturaP1");
+                            }
+
+                            alturaP1 = double.tryParse(_controllerAlturaP1.text)!;
+                            print("AQUI ALTURA: $alturaP1");
+
+                            if(alturaP1 * larguraP1 < 1 || alturaP1 * larguraP1 > 15
+                            || alturaP1 <0 || larguraP1 < 0 ){
+                              setState(() {
+                                _alertaCamposParedes = "Preencha os campos";
+                              });
+                            }else{
+                              totalParede1 = alturaP1 * larguraP1;
+                              setState(() {
+                                _alertaCamposParedes = "Área total: $totalParede1 m²";
+                              });
+                            }
+
+                          }
                       ),
                     ),
 
@@ -171,6 +225,39 @@ class _HomeState extends State<Home> {
                             fontSize: 22
                         ),
                         controller: _controllerLarguraP1,
+                        onChanged: (text){
+
+                          if(_controllerLarguraP1.text == ""){
+                            setState(() {
+                              larguraP1 = 0;
+                              _alertaBotaoCalcular = "Preencha os campos";
+                            });
+                            print("AQUI: VAZIO $alturaP1");
+                          }
+
+                            larguraP1 = double.tryParse(_controllerLarguraP1.text)!;
+                            print("AQUI LARGURA: $larguraP1");
+
+                            if(_controllerLarguraP1.text.isEmpty || _controllerLarguraP1.text == ""){
+                              setState(() {
+                                larguraP1 = 0;
+                                _alertaBotaoCalcular = "Preencha os campos";
+                              });
+
+                            }
+
+                            if(alturaP1 * larguraP1 < 1 || alturaP1 * larguraP1 > 15
+                                || alturaP1 <0 || larguraP1 < 0){
+                              setState(() {
+                                _alertaBotaoCalcular = "Preencha os campos";
+                              });
+                            }else{
+                              totalParede1 = alturaP1 * larguraP1;
+                              setState(() {
+                                _alertaBotaoCalcular = "Área total: $totalParede1 m²";
+                              });
+                            }
+                        },
                       ),
                     ),
 
@@ -252,6 +339,7 @@ class _HomeState extends State<Home> {
                         )
                       ],
                     ),
+                    Text(_alertaBotaoCalcular),
                   ],
                 ),
               ),
@@ -680,7 +768,7 @@ class _HomeState extends State<Home> {
             ),),
              Padding(padding: const EdgeInsets.only(top: 20),
             child: Text(
-              _textoResultado,
+              _resultadoFinal,
               style: const TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold
