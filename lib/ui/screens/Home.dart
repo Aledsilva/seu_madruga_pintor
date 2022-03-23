@@ -24,24 +24,41 @@ class _HomeState extends State<Home> {
 
   String _textoResultado = "";
 
-  double porta = 2.40;
-  double janela = 1.52;
-  int _counter = 0;
+  double portaDimen = 2.40;
+  double janelaDimen = 1.52;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  double lata_P = 0.5; //pinta 2.5m²
+  double lata_M = 2.5; //pinta 12.5m²
+  double lata_G = 3.6; //pinta 18m²
+  double lata_XG = 18; //pinta 90m²
 
-  void _decrementCounter() {
-    if(_counter >0 ) {
-      setState(() {
-        _counter--;
-      }
-      );
-    }
-  }
+
+
+  int porta1 = 0;
+  int janela1 = 0;
+
+  int porta2 = 0;
+  int janela2 = 0;
+
+  int porta3 = 0;
+  int janela3 = 0;
+
+  int porta4 = 0;
+  int janela4 = 0;
+
+  // void _incrementCounter(int num) {
+  //   setState(() {
+  //     num++;
+  //   });
+  // }
+  //
+  // void _decrementCounter(int num) {
+  //   if(num >0 ) {
+  //     setState(() {
+  //       num--;
+  //     });
+  //   }
+  // }
 
   void _calcular(){
 
@@ -87,16 +104,17 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.amberAccent,
       appBar: AppBar(
-        title: const Text("Madruga"),
+        title: const Text("Seu Madruga: O Pintor"),
         backgroundColor: Colors.blueGrey,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(10),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const Padding(padding: EdgeInsets.only(bottom: 20),
             child: Text("Quanta tinta será necessária?",
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.bold
@@ -169,7 +187,14 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.remove_circle), onPressed: () {
-                          _decrementCounter();
+
+
+                          if(porta1 >0){
+                            setState(() {
+                              porta1--;
+                            });
+                          }
+
                         },
                         ),
                         const Text(
@@ -179,14 +204,16 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(
-                          '[$_counter]',
+                          '[$porta1]',
                           style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.add_circle), onPressed: () {
-                          _incrementCounter();
+                          setState(() {
+                            porta1++;
+                          });
                         },
                         )
                       ],
@@ -197,7 +224,11 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.remove_circle), onPressed: () {
-                          _decrementCounter();
+                            setState(() {
+                              if(janela1 >0){
+                                janela1--;
+                              }
+                            });
                         },
                         ),
                         const Text(
@@ -207,20 +238,20 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(
-                          '[$_counter]',
+                          '[$janela1]',
                           style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.add_circle), onPressed: () {
-                          _incrementCounter();
+                          setState(() {
+                            janela1++;
+                          });
                         },
                         )
                       ],
                     ),
-
-
                   ],
                 ),
               ),
@@ -293,7 +324,11 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.remove_circle), onPressed: () {
-                          _decrementCounter();
+                            setState(() {
+                              if(porta2 >0){
+                                porta2--;
+                              }
+                            });
                         },
                         ),
                         const Text(
@@ -303,14 +338,16 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(
-                          '[$_counter]',
+                          '[$porta2]',
                           style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.add_circle), onPressed: () {
-                          _incrementCounter();
+                            setState(() {
+                              porta2++;
+                            });
                         },
                         )
                       ],
@@ -321,7 +358,11 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.remove_circle), onPressed: () {
-                          _decrementCounter();
+                            setState(() {
+                              if(janela2 >0){
+                                janela2--;
+                              }
+                            });
                         },
                         ),
                         const Text(
@@ -331,14 +372,16 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(
-                          '[$_counter]',
+                          '[$janela2]',
                           style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.add_circle), onPressed: () {
-                          _incrementCounter();
+                            setState(() {
+                              janela2++;
+                            });
                         },
                         )
                       ],
@@ -417,7 +460,11 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.remove_circle), onPressed: () {
-                          _decrementCounter();
+                            setState(() {
+                              if(porta3>0){
+                                porta3--;
+                              }
+                            });
                         },
                         ),
                         const Text(
@@ -427,14 +474,16 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(
-                          '[$_counter]',
+                          '[$porta3]',
                           style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.add_circle), onPressed: () {
-                          _incrementCounter();
+                            setState(() {
+                              porta3++;
+                            });
                         },
                         )
                       ],
@@ -445,7 +494,11 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.remove_circle), onPressed: () {
-                          _decrementCounter();
+                            setState(() {
+                              if(janela3>0){
+                                janela3--;
+                              }
+                            });
                         },
                         ),
                         const Text(
@@ -455,14 +508,16 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(
-                          '[$_counter]',
+                          '[$janela3]',
                           style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.add_circle), onPressed: () {
-                          _incrementCounter();
+                            setState(() {
+                              janela3++;
+                            });
                         },
                         )
                       ],
@@ -539,7 +594,11 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.remove_circle), onPressed: () {
-                          _decrementCounter();
+                            setState(() {
+                              if(porta4>0){
+                                porta4--;
+                              }
+                            });
                         },
                         ),
                         const Text(
@@ -549,14 +608,16 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(
-                          '[$_counter]',
+                          '[$porta4]',
                           style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.add_circle), onPressed: () {
-                          _incrementCounter();
+                            setState(() {
+                              porta4++;
+                            });
                         },
                         )
                       ],
@@ -567,7 +628,11 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.remove_circle), onPressed: () {
-                          _decrementCounter();
+                            setState(() {
+                              if(janela4>0){
+                                janela4--;
+                              }
+                            });
                         },
                         ),
                         const Text(
@@ -577,14 +642,16 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         Text(
-                          '[$_counter]',
+                          '[$janela4]',
                           style: const TextStyle(
                             fontSize: 20,
                           ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.add_circle), onPressed: () {
-                          _incrementCounter();
+                            setState(() {
+                              janela4++;
+                            });
                         },
                         )
                       ],
