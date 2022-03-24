@@ -178,8 +178,7 @@ class _HomeState extends State<Home> {
                         controller: _controllerAlturaP1,
                           onChanged: (text){
 
-
-                            if(_controllerAlturaP1.text == ""){
+                            if(_controllerAlturaP1.text.isEmpty || _controllerAlturaP1.text == ""){
                               setState(() {
                                 alturaP1 = 0;
                                 _alertaCamposParedes = "Preencha os campos";
@@ -190,10 +189,9 @@ class _HomeState extends State<Home> {
                             alturaP1 = double.tryParse(_controllerAlturaP1.text)!;
                             print("AQUI ALTURA: $alturaP1");
 
-                            if(alturaP1 * larguraP1 < 1 || alturaP1 * larguraP1 > 15
-                            || alturaP1 <0 || larguraP1 < 0 ){
+                            if(alturaP1 * larguraP1 < 1 || alturaP1 * larguraP1 > 15){
                               setState(() {
-                                _alertaCamposParedes = "Preencha os campos";
+                                _alertaCamposParedes = "O tamanho minimo deve ser de 1m² e máximo de 15m²";
                               });
                             }else{
                               totalParede1 = alturaP1 * larguraP1;
@@ -201,8 +199,7 @@ class _HomeState extends State<Home> {
                                 _alertaCamposParedes = "Área total: $totalParede1 m²";
                               });
                             }
-
-                          }
+                          },
                       ),
                     ),
 
@@ -227,34 +224,25 @@ class _HomeState extends State<Home> {
                         controller: _controllerLarguraP1,
                         onChanged: (text){
 
-                          if(_controllerLarguraP1.text == ""){
+                          if(_controllerLarguraP1.text.isEmpty || _controllerLarguraP1.text == ""){
                             setState(() {
                               larguraP1 = 0;
-                              _alertaBotaoCalcular = "Preencha os campos";
+                              _alertaCamposParedes = "Preencha os campos";
                             });
-                            print("AQUI: VAZIO $alturaP1");
+                            print("AQUI: VAZIO $larguraP1");
                           }
 
                             larguraP1 = double.tryParse(_controllerLarguraP1.text)!;
                             print("AQUI LARGURA: $larguraP1");
 
-                            if(_controllerLarguraP1.text.isEmpty || _controllerLarguraP1.text == ""){
+                            if(alturaP1 * larguraP1 < 1 || alturaP1 * larguraP1 > 15){
                               setState(() {
-                                larguraP1 = 0;
-                                _alertaBotaoCalcular = "Preencha os campos";
-                              });
-
-                            }
-
-                            if(alturaP1 * larguraP1 < 1 || alturaP1 * larguraP1 > 15
-                                || alturaP1 <0 || larguraP1 < 0){
-                              setState(() {
-                                _alertaBotaoCalcular = "Preencha os campos";
+                                _alertaCamposParedes = "O tamanho minimo deve ser de 1m² e máximo de 15m²";
                               });
                             }else{
                               totalParede1 = alturaP1 * larguraP1;
                               setState(() {
-                                _alertaBotaoCalcular = "Área total: $totalParede1 m²";
+                                _alertaCamposParedes = "Área total: $totalParede1 m²";
                               });
                             }
                         },
@@ -275,10 +263,14 @@ class _HomeState extends State<Home> {
                         IconButton(
                           icon: const Icon(Icons.remove_circle), onPressed: () {
 
-
                           if(porta1 >0){
                             setState(() {
+                              totalParede1 = totalParede1 + portaDimen;
+                              print("AQUI TOTAL PAREDE : $totalParede1");
                               porta1--;
+
+                              _alertaCamposParedes = "Área total: $totalParede1 m²";
+
                             });
                           }
 
@@ -298,9 +290,21 @@ class _HomeState extends State<Home> {
                         ),
                         IconButton(
                           icon: const Icon(Icons.add_circle), onPressed: () {
-                          setState(() {
-                            porta1++;
-                          });
+
+                            if(totalParede1 < portaDimen * 2){
+                              print("AQUI: POUCO ESPAÇO NA PAREDE");
+                            }else{
+                              setState(() {
+
+                                totalParede1 = totalParede1 - portaDimen;
+                                print("AQUI $totalParede1");
+                                porta1++;
+
+                                _alertaCamposParedes = "Área total: $totalParede1 m²";
+
+
+                              });
+                            }
                         },
                         )
                       ],
@@ -311,11 +315,16 @@ class _HomeState extends State<Home> {
                       children: [
                         IconButton(
                           icon: const Icon(Icons.remove_circle), onPressed: () {
+                          if(janela1 >0){
                             setState(() {
-                              if(janela1 >0){
-                                janela1--;
-                              }
+                              totalParede1 = totalParede1 + janelaDimen;
+                              print("AQUI TOTAL PAREDE : $totalParede1");
+                              janela1--;
+
+                              _alertaCamposParedes = "Área total: $totalParede1 m²";
+
                             });
+                          }
                         },
                         ),
                         const Text(
@@ -332,14 +341,26 @@ class _HomeState extends State<Home> {
                         ),
                         IconButton(
                           icon: const Icon(Icons.add_circle), onPressed: () {
-                          setState(() {
-                            janela1++;
-                          });
+
+                          if(totalParede1 < janelaDimen * 2){
+                            print("AQUI: POUCO ESPAÇO NA PAREDE");
+                          }else{
+                            setState(() {
+
+                              totalParede1 = totalParede1 - janelaDimen;
+                              print("AQUI $totalParede1");
+                              janela1++;
+
+                              _alertaCamposParedes = "Área total: $totalParede1 m²";
+
+
+                            });
+                          }
                         },
                         )
                       ],
                     ),
-                    Text(_alertaBotaoCalcular),
+                    Text(_alertaCamposParedes),
                   ],
                 ),
               ),
