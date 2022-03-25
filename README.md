@@ -1,16 +1,10 @@
 # seu_madruga_pintor
 
-A new Flutter project.
+App criado para te mostrar quantas latas de tinta você precisará para pintar um cômodo inteiro.
 
-## Getting Started
+## Como rodar este app
 
-This project is a starting point for a Flutter application.
+- Este projeto foi feito no AndroidStudio, por isso recomendo esta IDE para rodar no seu Android ou no Emulador.
+- Está aplicação também está disponível para download no link abaixo, por favor, permita a instalação.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[Google Drive APK](https://drive.google.com/file/d/1OG3qsegoJ6k9foUQbo2NgcNxigtFk1xW/view?usp=sharing)
